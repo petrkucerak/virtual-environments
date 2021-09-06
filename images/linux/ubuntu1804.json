@@ -17,7 +17,7 @@
     "builders": [
         {
             "type": "docker",
-            "image": "var.image_os",
+            "image": "{{user `image_os`}}",
             "export_path": "image.tar"
         }
     ],
