@@ -346,8 +346,9 @@
         [
           {
             "type": "docker-tag",
-            "repository": "AzyureAgents/linux",
-            "tag": "1804"
+            "repository": "azureagents/linux",
+            "tag": "1804",
+            "force": "true"
           }
         ]
       ]
