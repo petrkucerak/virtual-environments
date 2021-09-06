@@ -4,10 +4,9 @@
         "imagedata_file": "/imagegeneration/imagedata.json",
         "installer_script_folder": "/imagegeneration/installers",
         "helper_script_folder": "/imagegeneration/helpers",
-        "vm_size": "Standard_D4s_v4",
         "capture_name_prefix": "packer",
         "image_version": "dev",
-        "image_os": "ubuntu18",
+        "image_os": "ubuntu:18.04",
         "run_validation_diskspace": "false",
         "dockerhub_login": "{{env `DOCKERHUB_LOGIN`}}",
         "dockerhub_password": "{{env `DOCKERHUB_PASSWORD`}}"
@@ -18,7 +17,7 @@
     "builders": [
         {
             "type": "docker",
-            "image": "ubuntu",
+            "image": "var.image_os",
             "export_path": "image.tar"
         }
     ],
@@ -342,5 +341,14 @@
             ],
             "execute_command": "sudo sh -c '{{ .Vars }} {{ .Path }}'"
         }
-    ]
+    ],
+    "post-processors": [
+        [
+          {
+            "type": "docker-tag",
+            "repository": "AzyureAgents/linux",
+            "tag": "1804"
+          }
+        ]
+      ]
 }
